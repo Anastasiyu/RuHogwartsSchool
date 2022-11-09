@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
 
@@ -40,7 +40,7 @@ public class StudentController {
 
     @GetMapping("{id}")
     public Student read(@PathVariable long id) {
-        return studentService.read(id);
+        return studentService.readStudent(id);
     }
 
 
@@ -64,11 +64,11 @@ public class StudentController {
 
     @GetMapping(value = "/findStudentsBetweenAge")
     public ResponseEntity<Collection<Student>> findStudentsBetweenAge(@RequestParam int min,
-                                                                            @RequestParam int max) {
+                                                                      @RequestParam int max) {
         if (min > 0 && max > 0 && max > min) {
-            return ResponseEntity.ok(studentService.findByAgeBetween(min, max));
+           return ResponseEntity.ok(studentService.findByAgeBetween(min, max));
         }
-        return ResponseEntity.ok(Collections.emptyList());
+       return ResponseEntity.ok(Collections.emptyList());
     }
 
     @PostMapping(value = "/{id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

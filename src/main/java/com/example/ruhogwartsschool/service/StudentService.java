@@ -22,49 +22,49 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
 public class StudentService {
+    @Value("${Avatars.dir.path}")
+    private String avatarsDir;
     private final StudentRepository studentRepository;
- private  AvatarRepository avatarRepository;
+    private final AvatarRepository avatarRepository;
 
     public StudentService(StudentRepository studentRepository, AvatarRepository avatarRepository) {
         this.studentRepository = studentRepository;
         this.avatarRepository = avatarRepository;
     }
 
-    @Value("${Avatars.dir.path}")
-    private String avatarsDir;
 
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+
 
     public Student create(Student student) {
 
-       return studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
 
-        public Student read(Long id) {
-            return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundExeption(id));
-        }
+    public Student readStudent(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundExeption(id));
+    }
 
 
-        public Student update(Long id, Student student) {
-            Student oldStudent= studentRepository.findById(id).orElseThrow(()-> new StudentNotFoundExeption(id));
-            oldStudent.setName(student.getName());
-            oldStudent.setAge(student.getAge());
-            return studentRepository.save(oldStudent);
-        };
+    public Student update(Long id, Student student) {
+        Student oldStudent = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundExeption(id));
+        oldStudent.setName(student.getName());
+        oldStudent.setAge(student.getAge());
+        return studentRepository.save(oldStudent);
+    }
+
+    ;
 
 
-        public  void delete(Long id) {
-            Student student = studentRepository.findById(id).orElseThrow(()-> new FacultyNotFoundExeption(id));
-            studentRepository.delete(student);
+    public void delete(Long id) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new FacultyNotFoundExeption(id));
+        studentRepository.delete(student);
 
-        }
+    }
 
     public Collection<Student> findByAge(int age) {
         return studentRepository.findAllByAge(age).stream()
-                .filter(student -> student.getAge()==age)
+                .filter(student -> student.getAge() == age)
                 .collect(Collectors.toList());
     }
 
@@ -77,18 +77,18 @@ public class StudentService {
     }
 
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
-        Student student = read(studentId);
+        Student student = readStudent(studentId);
 
         Path filePath = Path.of(avatarsDir, studentId + "." + getExtension(file.getOriginalFilename()));
         Files.createDirectories(filePath.getParent());
         Files.deleteIfExists(filePath);
 
         try (InputStream is = file.getInputStream();
-             OutputStream ok = Files.newOutputStream(filePath, CREATE_NEW);
+             OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
              BufferedInputStream bis = new BufferedInputStream(is, 1024);
-             BufferedOutputStream bok = new BufferedOutputStream(ok, 1024)
+             BufferedOutputStream bos = new BufferedOutputStream(os, 1024)
         ) {
-            bis.transferTo(bok);
+            bis.transferTo(bos);
 
         }
         Avatar avatar = avatarRepository.findByStudentId(studentId).orElseGet(Avatar::new);
