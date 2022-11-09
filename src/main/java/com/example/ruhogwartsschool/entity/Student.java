@@ -1,19 +1,16 @@
 package com.example.ruhogwartsschool.entity;
 
-import org.springframework.data.annotation.Id;
-
-
 
 import javax.persistence.*;
 import javax.persistence.Table;
 
 
 import java.util.Objects;
+
 @Entity
 @Table(name = "students")
 public class Student  {
 
-    @javax.persistence.Id
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +19,7 @@ public class Student  {
     private String name;
 
     private int age;
+
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
@@ -34,11 +32,11 @@ public class Student  {
         this.faculty = faculty;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -54,7 +52,7 @@ public class Student  {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -75,4 +73,6 @@ public class Student  {
     public String toString() {
         return "Студент №" + id + ": "+ name + ", "+ age;
     }
+
+
 }
