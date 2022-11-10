@@ -24,6 +24,10 @@ public class Student  {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    public Student(long id, String name, int age) {
+    }
+
+
     public Faculty getFaculty() {
         return faculty;
     }
