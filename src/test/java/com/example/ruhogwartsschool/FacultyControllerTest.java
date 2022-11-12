@@ -4,15 +4,6 @@ import com.example.ruhogwartsschool.controller.FacultyController;
 import com.example.ruhogwartsschool.entity.Faculty;
 import com.example.ruhogwartsschool.repositories.FacultyRepository;
 import com.example.ruhogwartsschool.service.FacultyService;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.Collections;
-import java.util.Optional;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,8 +15,18 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Collections;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @WebMvcTest(controllers = FacultyController.class)
 public class FacultyControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -40,8 +41,8 @@ public class FacultyControllerTest {
 
     @Test
     public void testStudents() throws Exception {
-        final String name = "Ivanov Ivan";
-        final String color = "green";
+        final String name = "Ольга Полякова";
+        final String color = "red";
         final long id = 1;
 
         Faculty faculty = new Faculty(id, name, color);
@@ -97,6 +98,5 @@ public class FacultyControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
-
 
 }

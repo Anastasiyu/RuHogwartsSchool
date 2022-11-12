@@ -26,10 +26,14 @@ public class StudentController {
     private final StudentService studentService;
 
 
-    public StudentController(StudentService studentService) {
+    public final StudentController studentController;
 
+    public StudentController(StudentService studentService, StudentController studentController) {
         this.studentService = studentService;
+        this.studentController = studentController;
     }
+
+
 
     @PostMapping
     public ResponseEntity<Student> create(@RequestBody @Valid Student student) {
