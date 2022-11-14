@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = FacultyController.class)
 public class FacultyControllerTest {
 
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -41,8 +42,8 @@ public class FacultyControllerTest {
 
     @Test
     public void testStudents() throws Exception {
-        final String name = "Ольга Полякова";
-        final String color = "red";
+        final String name = "Ivanov Ivan";
+        final String color = "green";
         final long id = 1;
 
         Faculty faculty = new Faculty(id, name, color);

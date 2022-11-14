@@ -5,10 +5,10 @@ import com.example.ruhogwartsschool.exception.FacultyNotFoundExeption;
 import com.example.ruhogwartsschool.exception.StudentNotFoundExeption;
 
 import com.example.ruhogwartsschool.entity.Student;
-import com.example.ruhogwartsschool.repositories.AvatarRepository;
+
 import com.example.ruhogwartsschool.repositories.StudentRepository;
 
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
