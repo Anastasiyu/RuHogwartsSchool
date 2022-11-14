@@ -7,6 +7,7 @@ import com.example.ruhogwartsschool.service.FacultyService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.internal.stubbing.BaseStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -41,7 +42,7 @@ public class FacultyControllerTest {
     private FacultyController facultyController;
 
     @Test
-    public void testStudents() throws Exception {
+    public void testFaculty() throws Exception {
         final String name = "Ivanov Ivan";
         final String color = "green";
         final long id = 1;
@@ -49,15 +50,14 @@ public class FacultyControllerTest {
         Faculty faculty = new Faculty(id, name, color);
 
         JSONObject facultyObject = new JSONObject();
-        facultyObject.put("id", id);
-        facultyObject.put("name", name);
-        facultyObject.put("color", color);
+        facultyObject.put("id", 1);
+        facultyObject.put("name", "Ivanov Ivan");
+        facultyObject.put("color", "green");
 
 
         when(facultyRepository.save(any(Faculty.class))).thenReturn(faculty);
-        when(facultyRepository.findById(eq(id))).thenReturn(Optional.of(faculty));
+        when(facultyRepository.findById(any(Long.class))).thenReturn(Optional.of(faculty));
         when(facultyRepository.findAllByColor(eq(color))).thenReturn(Collections.singleton(faculty));
-
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/faculty")
                         .content(facultyObject.toString())
