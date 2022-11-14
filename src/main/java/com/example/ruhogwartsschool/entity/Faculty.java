@@ -6,7 +6,7 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "faculties")
+@Table(name = "faculty")
 public class Faculty {
 
 
@@ -20,6 +20,10 @@ public class Faculty {
     private Collection<Student> students;
 
     public Faculty(long id, String name, String color) {
+    }
+
+    public Faculty() {
+
     }
 
 

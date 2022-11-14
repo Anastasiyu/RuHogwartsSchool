@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 public class Student  {
 
 
@@ -25,6 +25,10 @@ public class Student  {
     private Faculty faculty;
 
     public Student(long id, String name, int age) {
+    }
+
+    public Student() {
+
     }
 
 
