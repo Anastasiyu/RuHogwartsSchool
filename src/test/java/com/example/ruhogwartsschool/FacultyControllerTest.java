@@ -50,14 +50,15 @@ public class FacultyControllerTest {
         Faculty faculty = new Faculty(id, name, color);
 
         JSONObject facultyObject = new JSONObject();
-        facultyObject.put("id", 1);
-        facultyObject.put("name", "Ivanov Ivan");
-        facultyObject.put("color", "green");
+        facultyObject.put("id", id);
+        facultyObject.put("name", name);
+        facultyObject.put("color", color);
 
 
         when(facultyRepository.save(any(Faculty.class))).thenReturn(faculty);
-        when(facultyRepository.findById(any(Long.class))).thenReturn(Optional.of(faculty));
+        when(facultyRepository.findById(eq(id))).thenReturn(Optional.of(faculty));
         when(facultyRepository.findAllByColor(eq(color))).thenReturn(Collections.singleton(faculty));
+
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/faculty")
                         .content(facultyObject.toString())
