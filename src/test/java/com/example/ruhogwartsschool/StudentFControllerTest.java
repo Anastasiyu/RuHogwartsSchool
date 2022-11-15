@@ -32,7 +32,15 @@ public class StudentFControllerTest {
                 .isNotNull();
     }
 
+    @Test
+    public void testPostStudent()throws  Exception{
+        Student student = new Student(1, "Ольга Полякова", 17);
+        student.setName("Ольга Полякова");
+        student.setAge(17);
 
+        assertThat(this.restTemplate.patchForObject("http://localhost:" +port+ "/student", student, String.class))
+                .isNotNull();
+    }
 
 
 }

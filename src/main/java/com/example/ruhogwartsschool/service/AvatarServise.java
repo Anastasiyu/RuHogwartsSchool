@@ -4,6 +4,7 @@ import com.example.ruhogwartsschool.entity.Avatar;
 import com.example.ruhogwartsschool.entity.Student;
 import com.example.ruhogwartsschool.repositories.AvatarRepository;
 import com.example.ruhogwartsschool.repositories.StudentRepository;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,6 +34,7 @@ public class AvatarServise {
     public Avatar readAvatar(Long studentId) {
         return avatarRepository.findByStudentId(studentId).orElse(new Avatar());
     }
+
 
     public void uploadAvatar(long studentId, MultipartFile avatarfile) throws IOException {
         Student student = studentRepository.getById(studentId);
@@ -79,6 +81,7 @@ public class AvatarServise {
             return baos.toByteArray();
         }
     }
+
 }
 
 
